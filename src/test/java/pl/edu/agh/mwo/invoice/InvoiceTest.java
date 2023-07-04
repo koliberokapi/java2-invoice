@@ -47,7 +47,7 @@ public class InvoiceTest {
     @Test
     public void testInvoiceSubtotalWithManySameProducts() {
         Product onions = new TaxFreeProduct("Warzywa", BigDecimal.valueOf(10));
-        invoice.addProduct(onions);
+        invoice.addProduct(onions,100);
         Assert.assertThat(new BigDecimal("1000"), Matchers.comparesEqualTo(invoice.getSubtotal()));
     }
 
@@ -85,7 +85,7 @@ public class InvoiceTest {
         invoice.addProduct(new DairyProduct("Maslo", new BigDecimal("100")));
         // price with tax: 12.30
         invoice.addProduct(new OtherProduct("Chipsy", new BigDecimal("10")));
-        Assert.assertThat(new BigDecimal("320.30"), Matchers.comparesEqualTo(invoice.getNetTotal()));
+        Assert.assertThat(new BigDecimal("320.30"), Matchers.comparesEqualTo(invoice.getTotal()));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class InvoiceTest {
         invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
         // 1000x pinezka - price with tax: 12.30
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
-        Assert.assertThat(new BigDecimal("54.70"), Matchers.comparesEqualTo(invoice.getNetTotal()));
+        Assert.assertThat(new BigDecimal("54.70"), Matchers.comparesEqualTo(invoice.getTotal()));
     }
 
     @Test(expected = IllegalArgumentException.class)
