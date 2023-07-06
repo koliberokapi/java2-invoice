@@ -30,23 +30,7 @@ public class Invoice {
         this.products.put(product, quantity);
     }
 
-
-    public BigDecimal getSubtotal() {
-
-        BigDecimal subtotal = BigDecimal.ZERO;
-
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            Product product = entry.getKey();
-            BigDecimal quantity = new BigDecimal(entry.getValue());
-            BigDecimal price = product.getPrice();
-            BigDecimal subAmount =  price.multiply(quantity);
-            subtotal = subtotal.add(subAmount);
-        }
-
-        return subtotal;
-    }
-
-    public BigDecimal getTax() {
+       public BigDecimal getTaxTotal() {
 
         BigDecimal tax = new BigDecimal(BigInteger.ZERO);
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
@@ -60,7 +44,7 @@ public class Invoice {
         return tax;
     }
 
-    public BigDecimal getTotal() {
+    public BigDecimal getGrossTotal() {
 
         BigDecimal total = BigDecimal.ZERO;
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
